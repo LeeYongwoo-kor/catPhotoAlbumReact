@@ -27,7 +27,7 @@ function normalizePort(val) {
 var port = normalizePort(portNumber);
 app.set("port", port);
 
-var apiRouter = require("./Router/test");
+var apiRouter = require("./Router");
 app.use("/api", apiRouter);
 
 // error handler
