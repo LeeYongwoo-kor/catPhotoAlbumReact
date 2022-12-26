@@ -36,6 +36,11 @@
 }
 ```
 
+> Install ESLint
+
+- 3. npm install eslint
+- 4. npx eslint --init (esm, react, typescript, browser)
+
 ---
 
 ## **Server** _(Port: 5000)_
