@@ -21,14 +21,18 @@ function normalizePort(val) {
   return false;
 }
 
+// use cors
+var cors = require("cors");
+app.use(cors());
+
 /**
  * Get port from environment and store in Express.
  */
 var port = normalizePort(portNumber);
 app.set("port", port);
 
-var apiRouter = require("./Router");
-app.use("/api", apiRouter);
+var apiRouter = require("./Router/index");
+app.use("/", apiRouter);
 
 // error handler
 app.use(function (err, req, res, next) {

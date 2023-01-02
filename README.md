@@ -92,3 +92,16 @@
   // ...
 }
 ```
+
+- 8. npm i cors
+
+```js
+{
+  // server.js
+  // ...
+  // use cors
+  var cors = require("cors");
+  app.use(cors());
+  // ...
+}
+```
