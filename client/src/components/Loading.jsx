@@ -6,16 +6,20 @@ import { loading } from "../util/assets.js";
 
 class Loading extends Component {
   constructor(props) {
+    console.count("Loading.constructor");
     super(props);
-    this.state = { isLoading: false };
   }
 
   render() {
+    console.count("Loading.render");
+    const { isLoading } = this.props;
     return (
       <>
-        {this.state.isLoading ? (
-          <div className="content">
-            <img src={loading} alt="loadingImage" />
+        {isLoading ? (
+          <div className="Loading Modal">
+            <div className="content">
+              <img src={loading} alt="loadingImage" />
+            </div>
           </div>
         ) : null}
       </>

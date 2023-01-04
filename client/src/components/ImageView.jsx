@@ -5,38 +5,38 @@ import React, { Component } from "react";
 
 class ImageView extends Component {
   constructor(props) {
+    console.count("ImageView.constructor");
     super(props);
-    this.state = {
-      isView: false,
-      selectedFilePath: props.selectedFilePath ? props.selectedFilePath : null,
-    };
     this.onClickHandler = this.onClickHandler.bind(this);
   }
 
   onClickHandler() {
-    this.state((prevState) => ({
-      ...this.state,
-      isView: !prevState.isView,
-    }));
+    this.props.onClickCallback();
   }
 
   render() {
+    console.count("ImageView.render");
+    const { selectedFilePath } = this.props;
     return (
       <>
-        {this.state.isView ? (
-          <div className="content">
-            {this.state.selectedFilePath ? (
+        {selectedFilePath ? (
+          <div className="ImageView Modal">
+            <div className="content">
               <img
-                src={this.state.selectedFilePath}
+                src={selectedFilePath}
                 alt="catImage"
                 onClick={this.onClickHandler}
               />
-            ) : null}
+            </div>
           </div>
         ) : null}
       </>
     );
   }
 }
+
+ImageView.defaultProps = {
+  selectedFilePath: null,
+};
 
 export default ImageView;

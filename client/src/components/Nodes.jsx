@@ -6,44 +6,53 @@ import { file, directory, prev, notfound } from "../util/assets.js";
 
 class Nodes extends Component {
   constructor(props) {
+    console.count("Nodes.constructor");
     super(props);
-    this.state = {
-      isRoot: props.isRoot,
-      nodes: props.nodes,
-    };
-    this.onClickHandler = this.onClickHandler.bind(this);
-    this.onClickBackHandler = this.onClickBackHandler.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleClickBack = this.handleClickBack.bind(this);
+    this.handleImgError = this.handleImgError.bind(this);
   }
 
-  onClickHandler(nodeId) {
-    const selectedNode = this.state.nodes.find((node) => node.id === +nodeId);
-    this.onClickCallback(selectedNode);
+  handleClick(nodeId) {
+    const selectedNode = this.props.nodes.find((node) => node.id === +nodeId);
+    this.props.onClickCallback(selectedNode);
   }
 
-  onClickBackHandler() {
+  handleClickBack() {
     this.props.onBackClickCallback();
   }
 
+  handleImgError(e) {
+    e.target.onerror = null; // prevents looping
+    e.target.src = notfound;
+  }
+
   render() {
+    console.count("Nodes.render");
+    const { isRoot, nodes } = this.props;
     return (
-      <>
-        {!this.state.isRoot ? (
-          <div className="Node" onClick={this.onClickBackHandler}>
-            <img src={prev} alt="prev" onError={notfound} />
+      <section>
+        {!isRoot ? (
+          <div className="Node" onClick={this.handleClickBack}>
+            <img src={prev} alt="prev" onError={this.handleImgError} />
             <div>Back</div>
           </div>
         ) : null}
-        {this.state.nodes.map((node) => (
-          <div className="Node" onClick={this.onClickHandler(node.id)}>
+        {nodes?.map((node) => (
+          <div
+            key={node.id}
+            className="Node"
+            onClick={() => this.handleClick(node.id)}
+          >
             <img
               src={node.type === "FILE" ? file : directory}
               alt="icon"
-              onError={notfound}
+              onError={this.handleImgError}
             />
             <div>{node.name}</div>
           </div>
         ))}
-      </>
+      </section>
     );
   }
 }

@@ -4,12 +4,9 @@ import React, { Component } from "react";
 // }
 
 class Breadcrumb extends Component {
-  static defaultProps = {
-    initialState: [],
-  };
   constructor(props) {
+    console.count("Breadcrumb.constructor");
     super(props);
-    this.state = props.initialState;
     this.onClickHanlder = this.onClickHandler.bind(this);
   }
 
@@ -18,19 +15,23 @@ class Breadcrumb extends Component {
   }
 
   render() {
+    console.count("Breadcrumb.render");
+    const { depth } = this.props;
     return (
-      <>
-        <span class="nav-item">root</span>
-        {this.state.map((node, idx) => (
+      <nav className="Breadcrumb">
+        <span className="nav-item" onClick={() => this.onClickHandler(null)}>
+          root
+        </span>
+        {depth?.map((node, idx) => (
           <span
             key={idx}
             className="nav-item"
-            onClick={this.onClickHandler(idx)}
+            onClick={() => this.onClickHandler(idx)}
           >
             → [{node.name}]
           </span>
         ))}
-      </>
+      </nav>
     );
   }
 }

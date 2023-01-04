@@ -5,6 +5,7 @@ import Breadcrumb from "./components/Breadcrumb";
 import ImageView from "./components/ImageView";
 import Loading from "./components/Loading";
 import Nodes from "./components/Nodes";
+import { images } from "./util/assets";
 
 // function App() {
 //   return <div className="App">Hello, world!</div>;
@@ -14,6 +15,7 @@ const cache = {};
 
 class App extends Component {
   constructor(props) {
+    console.count("App.constructor");
     super(props);
     this.state = {
       isRoot: true,
@@ -22,21 +24,20 @@ class App extends Component {
       depth: [],
       selectedFilePath: null,
     };
-    this.onClickBreadcrumbHandler = this.onClickBreadcrumbHandler.bind(this);
-    this.onClickNodesHandler = this.onClickNodesHandler.bind(this);
-    this.onBackClickNodesHandler = this.onBackClickNodesHandler(this);
+    this.handleClickBreadcrumb = this.handleClickBreadcrumb.bind(this);
+    this.handleClickNodes = this.handleClickNodes.bind(this);
+    this.handleClickBackNodes = this.handleClickBackNodes.bind(this);
+    this.handleClickImageView = this.handleClickImageView.bind(this);
   }
 
   async componentDidMount() {
+    console.count("App.componentDidMount");
+    this.setState({
+      isLoading: true,
+    });
     try {
-      this.setState({
-        ...this.state,
-        isLoading: true,
-      });
       const rootNodes = await requestApi();
       this.setState({
-        ...this.state,
-        isLoading: false,
         isRoot: true,
         nodes: rootNodes,
       });
@@ -46,16 +47,15 @@ class App extends Component {
       throw new Error("init(): Error occurred!");
     } finally {
       this.setState({
-        ...this.state,
         isLoading: false,
       });
     }
   }
 
-  onClickBreadcrumbHandler(idx) {
+  handleClickBreadcrumb(idx) {
+    console.log(idx);
     if (idx === null) {
       this.setState({
-        ...this.state,
         isRoot: true,
         depth: [],
         nodes: cache.root,
@@ -70,18 +70,16 @@ class App extends Component {
     const nextDepth = this.state.depth.slice(0, idx + 1);
 
     this.setState({
-      ...this.state,
       depth: nextDepth,
       nodes: cache[nextDepth[nextDepth.length - 1].id],
     });
   }
 
-  async onClickNodesHandler(node) {
+  async handleClickNodes(node) {
     try {
       if (node.type === "DIRECTORY") {
         if (cache[node.id]) {
           this.setState({
-            ...this.state,
             isRoot: false,
             depth: [...this.state.depth, node],
             nodes: cache[node.id],
@@ -89,7 +87,6 @@ class App extends Component {
         } else {
           const nextNodes = await requestApi(node.id);
           this.setState({
-            ...this.state,
             isRoot: false,
             depth: [...this.state.depth, node],
             nodes: nextNodes,
@@ -98,9 +95,9 @@ class App extends Component {
           cache[node.id] = nextNodes;
         }
       } else if (node.type === "FILE") {
+        const filePath = images + node.filePath;
         this.setState({
-          ...this.state,
-          selectedFilePath: node.filePath,
+          selectedFilePath: filePath,
         });
       }
     } catch (e) {
@@ -108,7 +105,7 @@ class App extends Component {
     }
   }
 
-  async onBackClickNodesHandler() {
+  async handleClickBackNodes() {
     try {
       const nextState = { ...this.state };
       nextState.depth.pop();
@@ -136,24 +133,29 @@ class App extends Component {
     }
   }
 
+  handleClickImageView() {
+    this.setState({ selectedFilePath: null });
+  }
+
   render() {
+    console.count("App.render");
     return (
       <>
-        <div className="Loading Modal">
-          <Loading />
-        </div>
-        <nav className="Breadcrumb">
-          <Breadcrumb onClickCallback={this.onClickBreadcrumbHandler} />
-        </nav>
-        <div className="ImageView Modal">
-          <ImageView />
-        </div>
-        <section>
-          <Nodes
-            onClickCallback={this.onClickNodesHandler}
-            onBackClickCallback={this.onBackClickNodesHandler}
-          />
-        </section>
+        <Loading isLoading={this.state.isLoading} />
+        <Breadcrumb
+          depth={this.state.depth}
+          onClickCallback={this.handleClickBreadcrumb}
+        />
+        <ImageView
+          selectedFilePath={this.state.selectedFilePath}
+          onClickCallback={this.handleClickImageView}
+        />
+        <Nodes
+          isRoot={this.state.isRoot}
+          nodes={this.state.nodes}
+          onClickCallback={this.handleClickNodes}
+          onBackClickCallback={this.handleClickBackNodes}
+        />
       </>
     );
   }

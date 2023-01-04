@@ -36,14 +36,14 @@ export const cats: ICat[] = [
     id: 4,
     name: "하얀 고양이",
     type: "FILE",
-    filePath: `${process.env.PUBLIC_URL}/images/r1i.jpg`,
+    filePath: `r1i.jpg`,
     parent: null,
   },
   {
     id: 5,
     name: "달과 고양이",
     type: "FILE",
-    filePath: `${process.env.PUBLIC_URL}/images/r2i.jpg`,
+    filePath: `r2i.jpg`,
     parent: null,
   },
   {
@@ -68,7 +68,7 @@ export const cats: ICat[] = [
     id: 8,
     name: "기지개 펴는 고양이",
     type: "FILE",
-    filePath: `${process.env.PUBLIC_URL}/images/a1i.jpg`,
+    filePath: `a1i.jpg`,
     parent: {
       id: 1,
     },
@@ -77,7 +77,7 @@ export const cats: ICat[] = [
     id: 9,
     name: "하품하는 고양이",
     type: "FILE",
-    filePath: `${process.env.PUBLIC_URL}/images/a2i.jpg`,
+    filePath: `a2i.jpg`,
     parent: {
       id: 1,
     },
@@ -86,7 +86,7 @@ export const cats: ICat[] = [
     id: 10,
     name: "핸섬 고양이",
     type: "FILE",
-    filePath: `${process.env.PUBLIC_URL}/images/aa1i.jpg`,
+    filePath: `aa1i.jpg`,
     parent: {
       id: 6,
     },
@@ -104,7 +104,7 @@ export const cats: ICat[] = [
     id: 12,
     name: "돌 위의 고양이",
     type: "FILE",
-    filePath: `${process.env.PUBLIC_URL}/images/ab1i.jpg`,
+    filePath: `ab1i.jpg`,
     parent: {
       id: 7,
     },
@@ -113,7 +113,7 @@ export const cats: ICat[] = [
     id: 13,
     name: "무서운 고양이",
     type: "FILE",
-    filePath: `${process.env.PUBLIC_URL}/images/aba1i.jpg`,
+    filePath: `aba1i.jpg`,
     parent: {
       id: 11,
     },
@@ -140,7 +140,7 @@ export const cats: ICat[] = [
     id: 16,
     name: "새하얀 고양이",
     type: "FILE",
-    filePath: `${process.env.PUBLIC_URL}/images/b1i.jpg`,
+    filePath: `b1i.jpg`,
     parent: {
       id: 2,
     },
@@ -149,7 +149,7 @@ export const cats: ICat[] = [
     id: 17,
     name: "휴식중인 고양이",
     type: "FILE",
-    filePath: `${process.env.PUBLIC_URL}/images/b2i.jpg`,
+    filePath: `b2i.jpg`,
     parent: {
       id: 2,
     },
@@ -158,7 +158,7 @@ export const cats: ICat[] = [
     id: 18,
     name: "장난치는 고양이",
     type: "FILE",
-    filePath: `${process.env.PUBLIC_URL}/images/ba1i.jpg`,
+    filePath: `ba1i.jpg`,
     parent: {
       id: 14,
     },
@@ -167,7 +167,7 @@ export const cats: ICat[] = [
     id: 19,
     name: "샴 고양이",
     type: "FILE",
-    filePath: `${process.env.PUBLIC_URL}/images/bb1i.jpg`,
+    filePath: `bb1i.jpg`,
     parent: {
       id: 15,
     },
@@ -176,7 +176,7 @@ export const cats: ICat[] = [
     id: 20,
     name: "웃는 고양이",
     type: "FILE",
-    filePath: `${process.env.PUBLIC_URL}/images/bb2i.jpg`,
+    filePath: `bb2i.jpg`,
     parent: {
       id: 15,
     },
@@ -194,7 +194,7 @@ export const cats: ICat[] = [
     id: 22,
     name: "새끼고양이 3마리",
     type: "FILE",
-    filePath: `${process.env.PUBLIC_URL}/images/c1i.jpg`,
+    filePath: `c1i.jpg`,
     parent: {
       id: 3,
     },
@@ -212,7 +212,7 @@ export const cats: ICat[] = [
     id: 24,
     name: "꽃밭의 고양이",
     type: "FILE",
-    filePath: `${process.env.PUBLIC_URL}/images/ca1i.jpg`,
+    filePath: `ca1i.jpg`,
     parent: {
       id: 21,
     },
@@ -239,7 +239,7 @@ export const cats: ICat[] = [
     id: 27,
     name: "새까만 고양이",
     type: "FILE",
-    filePath: `${process.env.PUBLIC_URL}/images/caa1i.jpg`,
+    filePath: `caa1i.jpg`,
     parent: {
       id: 23,
     },
@@ -248,7 +248,7 @@ export const cats: ICat[] = [
     id: 28,
     name: "얼굴 큰 고양이",
     type: "FILE",
-    filePath: `${process.env.PUBLIC_URL}/images/caaa1i.jpg`,
+    filePath: `caaa1i.jpg`,
     parent: {
       id: 25,
     },
@@ -257,7 +257,7 @@ export const cats: ICat[] = [
     id: 29,
     name: "고양이가 아닌 호랑이",
     type: "FILE",
-    filePath: `${process.env.PUBLIC_URL}/images/caab1i.jpg`,
+    filePath: `caab1i.jpg`,
     parent: {
       id: 26,
     },
